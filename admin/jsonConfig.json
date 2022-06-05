@@ -35,7 +35,7 @@
                 "zh-cn": "应用密码"
             }
         },
-        "intervall": {
+        "interval": {
             "type": "number",
             "newLine": true,
             "min": 1,
