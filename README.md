@@ -17,7 +17,7 @@ Adapter for Libre via LibreLinkUp
 
 ## Loginablauf
 
-Für LibreLinkUp anmdelden. In der Freestyle Libre App mit der LibreLinkUp verbinden und die LibreLinkUp Zugangsdatenin den Adapter eingeben.
+Für LibreLinkUp anmelden. In der Freestyle Libre App mit der LibreLinkUp verbinden und die LibreLinkUp Zugangsdaten in den Adapter eingeben.
 
 ## Steuern
 
