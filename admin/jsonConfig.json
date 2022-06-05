@@ -39,9 +39,7 @@
             "type": "number",
             "newLine": true,
             "min": 1,
-            "sm": 12,
-            "md": 4,
-            "lg": 4,
+            "sm": 2,
             "label": {
                 "en": "Update interval (in minutes)",
                 "de": "Aktualisierungsintervall (in Minuten)",
@@ -53,8 +51,7 @@
                 "es": "Intervalo de actualización (en minutos)",
                 "pl": "Interwał aktualizacji (w minutach)",
                 "zh-cn": "更新间隔（分钟）"
-            },
-            "help": "in minutes"
+            }
         }
     }
 }
