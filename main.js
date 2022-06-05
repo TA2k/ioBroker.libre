@@ -58,7 +58,7 @@ class Libre extends utils.Adapter {
 
         await this.login();
 
-        if (this.session.access_token) {
+        if (this.session.token) {
             await this.getDeviceList();
             await this.updateDevices();
             this.updateInterval = setInterval(async () => {
@@ -74,10 +74,10 @@ class Libre extends utils.Adapter {
             method: "post",
             url: "https://api.libreview.io/llu/auth/login",
             headers: this.header,
-            data: JSON.stringify({
+            data: {
                 email: this.config.username,
                 password: this.config.password,
-            }),
+            },
         })
             .then((res) => {
                 this.log.debug(JSON.stringify(res.data));
@@ -133,6 +133,17 @@ class Libre extends utils.Adapter {
                         },
                         native: {},
                     });
+                    await this.setObjectNotExistsAsync(id + ".graphJson", {
+                        type: "state",
+                        common: {
+                            name: "Raw Graph JSON",
+                            write: false,
+                            read: true,
+                            type: "string",
+                            role: "json",
+                        },
+                        native: {},
+                    });
 
                     const remoteArray = [{ command: "Refresh", name: "True = Refresh" }];
                     remoteArray.forEach((remote) => {
@@ -160,9 +171,9 @@ class Libre extends utils.Adapter {
     async updateDevices() {
         const statusArray = [
             {
-                path: "status",
+                path: "graph",
                 url: "https://api.libreview.io/llu/connections/$id/graph",
-                desc: "Status of the device",
+                desc: "Graph data of the device",
             },
         ];
 
@@ -188,6 +199,7 @@ class Libre extends utils.Adapter {
                         const forceIndex = true;
                         const preferedArrayName = null;
 
+                        this.setState(id + "." + element.path + "Json", JSON.stringify(data), true);
                         this.json2iob.parse(id + "." + element.path, data, { forceIndex: forceIndex, preferedArrayName: preferedArrayName, channelName: element.desc });
                     })
                     .catch((error) => {
