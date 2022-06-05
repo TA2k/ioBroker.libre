@@ -25,7 +25,7 @@ libre.0.vin.remote.refresh manueller Refresh
 
 ## Diskussion und Fragen
 
-<https://forum.iobroker.net/topic/>
+<https://forum.iobroker.net/topic/55443/test-freestyle-libre-librelinkup>
 
 ## Changelog
 
