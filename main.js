@@ -195,7 +195,9 @@ class Libre extends utils.Adapter {
                         if (data.data) {
                             data = data.data;
                         }
-
+                        if (data.graphData) {
+                            data.graphData = data.graphData.reverse();
+                        }
                         const forceIndex = true;
                         const preferedArrayName = null;
 
