@@ -19,7 +19,10 @@ Adapter for Libre via LibreLinkUp
 
 Für LibreLinkUp anmelden. In der Freestyle Libre App mit der LibreLinkUp verbinden und die LibreLinkUp Zugangsdaten in den Adapter eingeben.
 
-## Steuern
+## Steuern und Werte
+
+Aktueller Wert libre.0.id.graph.connection.glucoseMeasurement.Value
+Graph Werte libre.0.id.graph.graphData01.Value
 
 libre.0.vin.remote.refresh manueller Refresh
 
