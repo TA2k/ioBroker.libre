@@ -32,7 +32,7 @@ libre.0.vin.remote.refresh manueller Refresh
 
 ## Changelog
 
-### 0.0.1
+### 0.0.2
 * (TA2k) initial release
 
 ## License
