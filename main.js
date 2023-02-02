@@ -24,15 +24,13 @@ class Libre extends utils.Adapter {
     this.json2iob = new Json2iob(this);
     this.requestClient = axios.create();
     this.header = {
-      Pragma: "no-cache",
-      Accept: "*/*",
-      version: "4.5.0",
-      product: "llu.ios",
+      "Content-Type": "application/json",
       "Cache-Control": "no-cache",
-      "Accept-Language": "de-DE,de;q=0.9",
-      "Content-Tpe": "application/json",
-      "User-Agent":
-        "Mozilla/5.0 (iPhone; CPU OS 15_5 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/15.5 Mobile/10A5355d Safari/8536.25",
+      Pragma: "no-cache",
+      version: "4.5.0",
+      product: "llu.android",
+      "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 9)",
+      Connection: "Keep-Alive",
     };
   }
 
@@ -73,7 +71,7 @@ class Libre extends utils.Adapter {
   async login() {
     await this.requestClient({
       method: "post",
-      url: "https://api.libreview.io/llu/auth/login",
+      url: "https://api-" + this.config.region + ".libreview.io/llu/auth/login",
       headers: this.header,
       data: {
         email: this.config.username,
@@ -98,7 +96,7 @@ class Libre extends utils.Adapter {
   async getDeviceList() {
     await this.requestClient({
       method: "get",
-      url: "https://api.libreview.io/llu/connections",
+      url: "https://api-" + this.config.region + ".libreview.io/llu/connections",
       headers: this.header,
     })
       .then(async (res) => {
@@ -173,7 +171,7 @@ class Libre extends utils.Adapter {
     const statusArray = [
       {
         path: "graph",
-        url: "https://api.libreview.io/llu/connections/$id/graph",
+        url: "https://api-" + this.config.region + ".libreview.io/llu/connections/$id/graph",
         desc: "Graph data of the device",
       },
     ];

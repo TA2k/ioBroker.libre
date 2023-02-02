@@ -54,6 +54,24 @@
         "pl": "Interwał aktualizacji (w minutach)",
         "zh-cn": "更新间隔（分钟）"
       }
+    },
+    "region": {
+      "type": "text",
+      "label": {
+        "en": "region",
+        "de": "region",
+        "ru": "регион",
+        "pt": "região",
+        "nl": "reg",
+        "fr": "région",
+        "it": "regione",
+        "es": "región",
+        "pl": "region",
+        "uk": "регіон",
+        "zh-cn": "区域"
+      },
+      "newLine": true,
+      "sm": 3
     }
   }
 }
