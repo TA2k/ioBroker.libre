@@ -1,8 +1,11 @@
 {
   "common": {
     "name": "libre",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "news": {
+      "0.0.4": {
+        "en": "check login for new term of use"
+      },
       "0.0.3": {
         "en": "fix login"
       },

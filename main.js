@@ -27,7 +27,7 @@ class Libre extends utils.Adapter {
       "Content-Type": "application/json",
       "Cache-Control": "no-cache",
       Pragma: "no-cache",
-      version: "4.5.0",
+      version: "4.6.0",
       product: "llu.android",
       "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 9)",
       Connection: "Keep-Alive",
@@ -80,6 +80,10 @@ class Libre extends utils.Adapter {
     })
       .then((res) => {
         this.log.debug(JSON.stringify(res.data));
+        if (res.data.status !== 0) {
+          this.log.error("Login failed. Please check your credentials and login to the app and accept the terms of use.");
+          return;
+        }
         if (res.data.data && res.data.data.authTicket) {
           this.session = res.data.data.authTicket;
           this.header.Authorization = "Bearer " + this.session.token;
