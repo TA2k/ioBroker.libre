@@ -27,7 +27,7 @@ class Libre extends utils.Adapter {
       "Content-Type": "application/json",
       "Cache-Control": "no-cache",
       Pragma: "no-cache",
-      version: "4.7.0",
+      version: "9.9.9",
       product: "llu.android",
       "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 9)",
       Connection: "Keep-Alive",
