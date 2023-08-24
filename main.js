@@ -204,7 +204,7 @@ class Libre extends utils.Adapter {
             const forceIndex = true;
             const preferedArrayName = null;
 
-            this.setState(id + "." + element.path + "Json", JSON.stringify(data), true);
+            // this.setState(id + "." + element.path + "Json", JSON.stringify(data), true);
             this.json2iob.parse(id + "." + element.path, data, {
               forceIndex: forceIndex,
               preferedArrayName: preferedArrayName,
