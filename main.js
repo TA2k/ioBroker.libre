@@ -6,7 +6,7 @@
 
 const utils = require("@iobroker/adapter-core");
 const axios = require("axios").default;
-const Json2iob = require("./lib/json2iob");
+const Json2iob = require("json2iob");
 
 class Libre extends utils.Adapter {
   /**
