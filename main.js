@@ -136,17 +136,17 @@ class Libre extends utils.Adapter {
             },
             native: {},
           });
-          await this.setObjectNotExistsAsync(id + ".graphJson", {
-            type: "state",
-            common: {
-              name: "Raw Graph JSON",
-              write: false,
-              read: true,
-              type: "string",
-              role: "json",
-            },
-            native: {},
-          });
+          // await this.setObjectNotExistsAsync(id + ".graphJson", {
+          //   type: "state",
+          //   common: {
+          //     name: "Raw Graph JSON",
+          //     write: false,
+          //     read: true,
+          //     type: "string",
+          //     role: "json",
+          //   },
+          //   native: {},
+          // });
 
           const remoteArray = [{ command: "Refresh", name: "True = Refresh" }];
           remoteArray.forEach((remote) => {
