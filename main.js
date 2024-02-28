@@ -66,6 +66,9 @@ class Libre extends utils.Adapter {
       this.refreshTokenInterval = setInterval(() => {
         this.refreshToken();
       }, 22 * 60 * 60 * 1000);
+      this.generalInterval = this.setInterval(() => {
+        this.getDeviceList();
+      }, 23.9 * 60 * 60 * 1000);
     }
   }
   async login() {
@@ -109,6 +112,7 @@ class Libre extends utils.Adapter {
           this.log.error("No user found. Please connect your FreeStyle Libre App with LibreLinkUp");
           return;
         }
+        this.deviceArray = [];
         for (const device of res.data.data) {
           const id = device.patientId; // Alternative datapoint for serial number
 
@@ -129,10 +133,10 @@ class Libre extends utils.Adapter {
             },
             native: {},
           });
-          await this.setObjectNotExistsAsync(id + ".general", {
+          await this.extendObjectAsync(id + ".general", {
             type: "channel",
             common: {
-              name: "General Information",
+              name: "General Information. Update only once a day",
             },
             native: {},
           });
