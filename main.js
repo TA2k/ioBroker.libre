@@ -7,6 +7,8 @@
 const utils = require("@iobroker/adapter-core");
 const axios = require("axios").default;
 const Json2iob = require("json2iob");
+const { createHTTP2Adapter } = require("axios-http2-adapter");
+const http2 = require("http2-wrapper");
 
 class Libre extends utils.Adapter {
   /**
@@ -22,6 +24,15 @@ class Libre extends utils.Adapter {
     this.on("unload", this.onUnload.bind(this));
     this.deviceArray = [];
     this.json2iob = new Json2iob(this);
+
+    const adapterConfig = {
+      agent: new http2.Agent({
+        /* options */
+      }),
+      force: true, // Force HTTP/2 without ALPN check - adapter will not check whether the endpoint supports http2 before the request
+    };
+
+    axios.defaults.adapter = createHTTP2Adapter(adapterConfig);
     this.requestClient = axios.create();
     this.header = {
       "Content-Type": "application/json",
