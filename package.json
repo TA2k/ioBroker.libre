@@ -1,6 +1,6 @@
 {
   "name": "iobroker.libre",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Adapter for Libre via LibreLinkUp",
   "author": {
     "name": "TA2k",

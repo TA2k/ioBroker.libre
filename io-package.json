@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "libre",
-    "version": "0.0.5",
+    "version": "0.1.0",
     "news": {
+      "0.1.0": {
+        "en": "fix login with http2",
+        "de": "Fix-Login mit HTTP2"
+      },
       "0.0.5": {
         "en": "check login for new term of use"
       },

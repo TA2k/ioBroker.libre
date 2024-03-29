@@ -147,7 +147,7 @@ class Libre extends utils.Adapter {
           await this.extendObjectAsync(id + ".general", {
             type: "channel",
             common: {
-              name: "General Information. Update only once a day",
+              name: "General Information. Update only once a day or after restart",
             },
             native: {},
           });
