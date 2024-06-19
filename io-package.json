@@ -91,7 +91,8 @@
     "username": "",
     "password": "",
     "interval": 10,
-    "region": "de"
+    "region": "de",
+    "version": "4.10.0"
   },
   "objects": [],
   "instanceObjects": [

@@ -72,6 +72,23 @@
       },
       "newLine": true,
       "sm": 3
+    },
+    "version": {
+      "type": "text",
+      "label": {
+        "en": "Version of the App",
+        "de": "Version der App",
+        "ru": "Версия приложения",
+        "pt": "Versão do aplicativo",
+        "nl": "Versie van de app",
+        "fr": "Version de l'application",
+        "it": "Versione dell'app",
+        "es": "Versión de la aplicación",
+        "pl": "Wersja aplikacji",
+        "zh-cn": "应用程序的版本"
+      },
+      "newLine": true,
+      "sm": 3
     }
   }
 }

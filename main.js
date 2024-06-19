@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
 /*
  * Created with @iobroker/create-adapter v1.34.1
  */
 
-const utils = require("@iobroker/adapter-core");
-const axios = require("axios").default;
-const Json2iob = require("json2iob");
-const { createHTTP2Adapter } = require("axios-http2-adapter");
-const http2 = require("http2-wrapper");
+const utils = require('@iobroker/adapter-core');
+const axios = require('axios').default;
+const Json2iob = require('json2iob');
+const { createHTTP2Adapter } = require('axios-http2-adapter');
+const http2 = require('http2-wrapper');
 
 class Libre extends utils.Adapter {
   /**
@@ -17,11 +17,11 @@ class Libre extends utils.Adapter {
   constructor(options) {
     super({
       ...options,
-      name: "libre",
+      name: 'libre',
     });
-    this.on("ready", this.onReady.bind(this));
-    this.on("stateChange", this.onStateChange.bind(this));
-    this.on("unload", this.onUnload.bind(this));
+    this.on('ready', this.onReady.bind(this));
+    this.on('stateChange', this.onStateChange.bind(this));
+    this.on('unload', this.onUnload.bind(this));
     this.deviceArray = [];
     this.json2iob = new Json2iob(this);
 
@@ -35,13 +35,15 @@ class Libre extends utils.Adapter {
     axios.defaults.adapter = createHTTP2Adapter(adapterConfig);
     this.requestClient = axios.create();
     this.header = {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
-      version: "9.9.9",
-      product: "llu.android",
-      "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 9)",
-      Connection: "Keep-Alive",
+      'content-type': 'application/json',
+      pragma: 'no-cache',
+      accept: '*/*',
+      version: '9.10.0',
+      product: 'llu.ios',
+      'cache-control': 'no-cache',
+      'accept-language': 'de-DE,de;q=0.9',
+      'user-agent':
+        'Mozilla/5.0 (iPhone; CPU OS 16_7.7 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/16.7.7 Mobile/10A5355d Safari/8536.25',
     };
   }
 
@@ -50,13 +52,13 @@ class Libre extends utils.Adapter {
    */
   async onReady() {
     // Reset the connection indicator during startup
-    this.setState("info.connection", false, true);
+    this.setState('info.connection', false, true);
     if (this.config.interval < 0.5) {
-      this.log.info("Set interval to minimum 0.5");
+      this.log.info('Set interval to minimum 0.5');
       this.config.interval = 0.5;
     }
     if (!this.config.username || !this.config.password) {
-      this.log.error("Please set username and password in the instance settings");
+      this.log.error('Please set username and password in the instance settings');
       return;
     }
 
@@ -64,7 +66,7 @@ class Libre extends utils.Adapter {
     this.reLoginTimeout = null;
     this.refreshTokenTimeout = null;
     this.session = {};
-    this.subscribeStates("*");
+    this.subscribeStates('*');
 
     await this.login();
 
@@ -84,8 +86,8 @@ class Libre extends utils.Adapter {
   }
   async login() {
     await this.requestClient({
-      method: "post",
-      url: "https://api-" + this.config.region + ".libreview.io/llu/auth/login",
+      method: 'post',
+      url: 'https://api-' + this.config.region + '.libreview.io/llu/auth/login',
       headers: this.header,
       data: {
         email: this.config.username,
@@ -95,13 +97,13 @@ class Libre extends utils.Adapter {
       .then((res) => {
         this.log.debug(JSON.stringify(res.data));
         if (res.data.status !== 0) {
-          this.log.error("Login failed. Please check your credentials and login to the app and accept the terms of use.");
+          this.log.error('Login failed. Please check your credentials and login to the app and accept the terms of use.');
           return;
         }
         if (res.data.data && res.data.data.authTicket) {
           this.session = res.data.data.authTicket;
-          this.header.Authorization = "Bearer " + this.session.token;
-          this.setState("info.connection", true, true);
+          this.header.Authorization = 'Bearer ' + this.session.token;
+          this.setState('info.connection', true, true);
           return;
         }
         this.log.error(JSON.stringify(res.data));
@@ -113,14 +115,14 @@ class Libre extends utils.Adapter {
   }
   async getDeviceList() {
     await this.requestClient({
-      method: "get",
-      url: "https://api-" + this.config.region + ".libreview.io/llu/connections",
+      method: 'get',
+      url: 'https://api-' + this.config.region + '.libreview.io/llu/connections',
       headers: this.header,
     })
       .then(async (res) => {
         this.log.debug(JSON.stringify(res.data));
         if (res.data.data.length === 0) {
-          this.log.error("No user found. Please connect your FreeStyle Libre App with LibreLinkUp");
+          this.log.error('No user found. Please connect your FreeStyle Libre App with LibreLinkUp');
           return;
         }
         this.deviceArray = [];
@@ -128,26 +130,26 @@ class Libre extends utils.Adapter {
           const id = device.patientId; // Alternative datapoint for serial number
 
           this.deviceArray.push(id);
-          const name = device.firstName + " " + device.lastName;
+          const name = device.firstName + ' ' + device.lastName;
 
           await this.setObjectNotExistsAsync(id, {
-            type: "device",
+            type: 'device',
             common: {
               name: name,
             },
             native: {},
           });
-          await this.setObjectNotExistsAsync(id + ".remote", {
-            type: "channel",
+          await this.setObjectNotExistsAsync(id + '.remote', {
+            type: 'channel',
             common: {
-              name: "Remote Controls",
+              name: 'Remote Controls',
             },
             native: {},
           });
-          await this.extendObjectAsync(id + ".general", {
-            type: "channel",
+          await this.extendObjectAsync(id + '.general', {
+            type: 'channel',
             common: {
-              name: "General Information. Update only once a day or after restart",
+              name: 'General Information. Update only once a day',
             },
             native: {},
           });
@@ -163,44 +165,49 @@ class Libre extends utils.Adapter {
           //   native: {},
           // });
 
-          const remoteArray = [{ command: "Refresh", name: "True = Refresh" }];
+          const remoteArray = [{ command: 'Refresh', name: 'True = Refresh' }];
           remoteArray.forEach((remote) => {
-            this.setObjectNotExists(id + ".remote." + remote.command, {
-              type: "state",
+            this.setObjectNotExists(id + '.remote.' + remote.command, {
+              type: 'state',
               common: {
-                name: remote.name || "",
-                type: remote.type || "boolean",
-                role: remote.role || "boolean",
+                name: remote.name || '',
+                type: remote.type || 'boolean',
+                role: remote.role || 'boolean',
                 write: true,
                 read: true,
               },
               native: {},
             });
           });
-          this.json2iob.parse(id + ".general", device);
+          this.json2iob.parse(id + '.general', device);
         }
       })
       .catch((error) => {
         this.log.error(error);
-        error.response && this.log.error(JSON.stringify(error.response.data));
+        if (error.response) {
+          this.log.error(JSON.stringify(error.response.data));
+          if (error.response.data && error.response.data.message && error.response.data.message === 'RequiredHeaderMissing') {
+            this.log.error('Please update the version in the settings with the current version of the app');
+          }
+        }
       });
   }
 
   async updateDevices() {
     const statusArray = [
       {
-        path: "graph",
-        url: "https://api-" + this.config.region + ".libreview.io/llu/connections/$id/graph",
-        desc: "Graph data of the device",
+        path: 'graph',
+        url: 'https://api-' + this.config.region + '.libreview.io/llu/connections/$id/graph',
+        desc: 'Graph data of the device',
       },
     ];
 
     for (const id of this.deviceArray) {
       for (const element of statusArray) {
-        const url = element.url.replace("$id", id);
+        const url = element.url.replace('$id', id);
 
         await this.requestClient({
-          method: element.method || "get",
+          method: element.method || 'get',
           url: url,
           headers: this.header,
         })
@@ -220,7 +227,7 @@ class Libre extends utils.Adapter {
             const preferedArrayName = null;
 
             // this.setState(id + "." + element.path + "Json", JSON.stringify(data), true);
-            this.json2iob.parse(id + "." + element.path, data, {
+            this.json2iob.parse(id + '.' + element.path, data, {
               forceIndex: forceIndex,
               preferedArrayName: preferedArrayName,
               channelName: element.desc,
@@ -230,7 +237,7 @@ class Libre extends utils.Adapter {
             if (error.response) {
               if (error.response.status === 401) {
                 error.response && this.log.debug(JSON.stringify(error.response.data));
-                this.log.info(element.path + " receive 401 error. Refresh Token in 60 seconds");
+                this.log.info(element.path + ' receive 401 error. Refresh Token in 60 seconds');
                 this.refreshTokenTimeout && clearTimeout(this.refreshTokenTimeout);
                 this.refreshTokenTimeout = setTimeout(() => {
                   this.refreshToken();
@@ -248,7 +255,7 @@ class Libre extends utils.Adapter {
   }
   async refreshToken() {
     if (!this.session) {
-      this.log.error("No session found relogin");
+      this.log.error('No session found relogin');
       await this.login();
       return;
     }
@@ -261,7 +268,7 @@ class Libre extends utils.Adapter {
    */
   onUnload(callback) {
     try {
-      this.setState("info.connection", false, true);
+      this.setState('info.connection', false, true);
       this.refreshTimeout && clearTimeout(this.refreshTimeout);
       this.reLoginTimeout && clearTimeout(this.reLoginTimeout);
       this.refreshTokenTimeout && clearTimeout(this.refreshTokenTimeout);
@@ -281,13 +288,13 @@ class Libre extends utils.Adapter {
   async onStateChange(id, state) {
     if (state) {
       if (!state.ack) {
-        const deviceId = id.split(".")[2];
-        const command = id.split(".")[4];
-        if (id.split(".")[3] !== "remote") {
+        //const deviceId = id.split('.')[2];
+        const command = id.split('.')[4];
+        if (id.split('.')[3] !== 'remote') {
           return;
         }
 
-        if (command === "Refresh") {
+        if (command === 'Refresh') {
           this.updateDevices();
         }
       }
