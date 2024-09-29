@@ -97,7 +97,7 @@ class Libre extends utils.Adapter {
       .then((res) => {
         this.log.debug(JSON.stringify(res.data));
         if (res.data.status !== 0) {
-          this.log.error('Login failed. Please check your credentials and login to the app and accept the terms of use.');
+          this.log.error('Login failed. Please check your credentials and logout and login to the app and accept the terms of use.');
           return;
         }
         if (res.data.data && res.data.data.authTicket) {
