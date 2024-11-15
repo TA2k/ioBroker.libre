@@ -9,6 +9,7 @@ const axios = require('axios').default;
 const Json2iob = require('json2iob');
 const { createHTTP2Adapter } = require('axios-http2-adapter');
 const http2 = require('http2-wrapper');
+const crypto = require('crypto');
 
 class Libre extends utils.Adapter {
   /**
@@ -50,6 +51,11 @@ class Libre extends utils.Adapter {
       this.log.error('Please set username and password in the instance settings');
       return;
     }
+    if (this.config.version) {
+      if (this.config.version === '4.10.0') {
+        this.config.version = '4.12.0';
+      }
+    }
     this.header = {
       'content-type': 'application/json',
       pragma: 'no-cache',
@@ -62,7 +68,7 @@ class Libre extends utils.Adapter {
       'user-agent':
         'Mozilla/5.0 (iPhone; CPU OS 16_7.7 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/16.7.7 Mobile/10A5355d Safari/8536.25',
     };
-    this.log.info(`Using version ${this.config.version || '4.12.0'} please update to the latest version of the app if necessary`);
+    this.log.info(`Using version ${this.config.version || '4.10.0'} please update to the latest version of the app if necessary`);
     this.updateInterval = null;
     this.reLoginTimeout = null;
     this.refreshTokenTimeout = null;
@@ -104,6 +110,8 @@ class Libre extends utils.Adapter {
         if (res.data.data && res.data.data.authTicket) {
           this.session = res.data.data.authTicket;
           this.header.Authorization = 'Bearer ' + this.session.token;
+          //set sha256 hash from id set as accountid
+          this.header['account-id'] = crypto.createHash('sha256').update(res.data.data.user.id).digest('hex');
           this.setState('info.connection', true, true);
           return;
         }
