@@ -32,7 +32,8 @@ libre.0.vin.remote.refresh manueller Refresh
 <https://forum.iobroker.net/topic/55443/test-freestyle-libre-librelinkup>
 
 ## Changelog
-### 0.1.2 (2024-11-15)
+
+### 0.1.3 (2024-11-15)
 
 - login fixed
 

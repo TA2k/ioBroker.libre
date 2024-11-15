@@ -62,7 +62,7 @@ class Libre extends utils.Adapter {
       accept: '*/*',
       version: this.config.version || '4.12.0',
       product: 'llu.ios',
-      ' account-id': '',
+      'account-id': '',
       'cache-control': 'no-cache',
       'accept-language': 'de-DE,de;q=0.9',
       'user-agent':
