@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "libre",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "news": {
+      "0.1.2": {
+        "en": "login fixed",
+        "de": "Anmeldung gefixt",
+        "ru": "фиксированный",
+        "pt": "login fixo",
+        "nl": "login vast",
+        "fr": "login corrigé",
+        "it": "login fisso",
+        "es": "login fijo",
+        "pl": "login stały",
+        "uk": "логін",
+        "zh-cn": "登录已固定"
+      },
       "0.1.1": {
         "en": "fix app version check",
         "de": "Fix für App-Version Überprüfung"

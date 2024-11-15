@@ -1,4 +1,5 @@
 ![Logo](admin/libre.png)
+
 # ioBroker.libre
 
 [![NPM version](https://img.shields.io/npm/v/iobroker.libre.svg)](https://www.npmjs.com/package/iobroker.libre)
@@ -31,17 +32,23 @@ libre.0.vin.remote.refresh manueller Refresh
 <https://forum.iobroker.net/topic/55443/test-freestyle-libre-librelinkup>
 
 ## Changelog
+### 0.1.2 (2024-11-15)
+
+- login fixed
 
 ### 0.0.3
-* (TA2k) fix login
+
+- (TA2k) fix login
 
 ### 0.0.2
-* (TA2k) initial release
+
+- (TA2k) initial release
 
 ## License
+
 MIT License
 
-Copyright (c) 2022 TA2k <tombox2020@gmail.com>
+Copyright (c) 2022-2030 TA2k <tombox2020@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
