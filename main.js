@@ -54,14 +54,15 @@ class Libre extends utils.Adapter {
       'content-type': 'application/json',
       pragma: 'no-cache',
       accept: '*/*',
-      version: this.config.version || '4.10.0',
+      version: this.config.version || '4.12.0',
       product: 'llu.ios',
+      ' account-id': '',
       'cache-control': 'no-cache',
       'accept-language': 'de-DE,de;q=0.9',
       'user-agent':
         'Mozilla/5.0 (iPhone; CPU OS 16_7.7 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/16.7.7 Mobile/10A5355d Safari/8536.25',
     };
-    this.log.info(`Using version ${this.config.version || '4.10.0'} please update to the latest version of the app if necessary`);
+    this.log.info(`Using version ${this.config.version || '4.12.0'} please update to the latest version of the app if necessary`);
     this.updateInterval = null;
     this.reLoginTimeout = null;
     this.refreshTokenTimeout = null;
