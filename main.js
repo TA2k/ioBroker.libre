@@ -53,14 +53,14 @@ class Libre extends utils.Adapter {
     }
     if (this.config.version) {
       if (this.config.version === '4.10.0') {
-        this.config.version = '4.12.0';
+        this.config.version = '4.16.0';
       }
     }
     this.header = {
       'content-type': 'application/json',
       pragma: 'no-cache',
       accept: '*/*',
-      version: this.config.version || '4.12.0',
+      version: this.config.version || '4.16.0',
       product: 'llu.ios',
       'account-id': '',
       'cache-control': 'no-cache',

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "libre",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "news": {
+      "0.1.4": {
+        "en": "login fixed",
+        "de": "anmelden",
+        "ru": "фиксированный",
+        "pt": "login fixo",
+        "nl": "login vast",
+        "fr": "login corrigé",
+        "it": "login fisso",
+        "es": "login fijo",
+        "pl": "login stały",
+        "uk": "логін",
+        "zh-cn": "登录已固定"
+      },
       "0.1.3": {
         "en": "login fixed",
         "de": "Anmeldung gefixt",
@@ -67,8 +80,15 @@
       "pl": "Adapter do Libre przez LibreLinkUp",
       "zh-cn": "通过 LibreLinkUp 的 Libre 适配器"
     },
-    "authors": ["TA2k <tombox2020@gmail.com>"],
-    "keywords": ["Libre 3", "Libre 2", "FreeStyle Libre", "LibreLinkUp"],
+    "authors": [
+      "TA2k <tombox2020@gmail.com>"
+    ],
+    "keywords": [
+      "Libre 3",
+      "Libre 2",
+      "FreeStyle Libre",
+      "LibreLinkUp"
+    ],
     "license": "MIT",
     "platform": "Javascript/Node.js",
     "main": "main.js",
@@ -102,8 +122,12 @@
       }
     ]
   },
-  "encryptedNative": ["password"],
-  "protectedNative": ["password"],
+  "encryptedNative": [
+    "password"
+  ],
+  "protectedNative": [
+    "password"
+  ],
   "native": {
     "username": "",
     "password": "",
