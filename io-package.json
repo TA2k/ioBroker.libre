@@ -97,6 +97,7 @@
     "extIcon": "https://raw.githubusercontent.com/TA2k/ioBroker.libre/master/admin/libre.png",
     "readme": "https://github.com/TA2k/ioBroker.libre/blob/master/README.md",
     "loglevel": "info",
+    "tier": 2,
     "mode": "daemon",
     "type": "health",
     "compact": true,
