@@ -9,7 +9,7 @@ const axios = require('axios').default;
 const Json2iob = require('json2iob');
 const { createHTTP2Adapter } = require('axios-http2-adapter');
 const http2 = require('http2-wrapper');
-const crypto = require('crypto');
+const crypto = require('node:crypto');
 
 class Libre extends utils.Adapter {
   /**
