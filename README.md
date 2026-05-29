@@ -32,6 +32,10 @@ libre.0.vin.remote.refresh manueller Refresh
 <https://forum.iobroker.net/topic/55443/test-freestyle-libre-librelinkup>
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires js-controller >= 6.0.11 now.
+
 ### 0.1.4 (2025-10-08)
 
 -login fixed
